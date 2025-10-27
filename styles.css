@@ -1,0 +1,96 @@
+
+* {margin:0; padding:0; box-sizing:border-box;}
+
+
+body {
+    font-family: "Poppins", Arial, sans-serif;
+    background: #f6f9fc;
+    color: #333;
+    max-width:900px; margin:auto;
+    padding:40px 20px; line-height:1.6;
+}
+
+
+.header {
+    display:flex; align-items:center; justify-content:space-between;
+    background:#fff; padding:20px; border-radius:12px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1); margin-bottom:30px;
+}
+.header .info {flex:1;}
+.header h1 {color:#1f3c88; font-size:2rem; margin-bottom:5px; text-transform:uppercase;}
+.header h4 {color:#555; font-weight:400;}
+
+
+.header {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+    gap: 20px; 
+}
+
+
+.header .photo img {
+    width: 140px;
+    height: 140px; 
+    object-fit: cover;
+    border: 3px solid #1f3c88;
+    border-radius: 6px; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+
+.header .info {
+    flex: 1; /* باخد كل المساحة المتبقية */
+}
+
+.header h1 {
+    color: #1f3c88;
+    font-size: 2rem;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.header h4 {
+    color: #555;
+    font-weight: 400;
+}
+
+/* Responsive */
+@media (max-width:768px){
+    .header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .header .photo img {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+/* Headings */
+h2 {color:#2c3e50; font-size:1.5rem; margin:30px 0 10px; border-left:4px solid #1f3c88; padding-left:8px;}
+h4 {margin-bottom:10px; color:#444;}
+
+/* Lists */
+ul {margin-left:30px; margin-bottom:20px; list-style:square;}
+ul li {margin-bottom:6px; transition:0.2s;}
+ul li:hover {color:#1f3c88;}
+
+/* Contact */
+.contact {background:#fff; padding:15px; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.1);}
+.contact a {color:#1f3c88; text-decoration:none;}
+.contact a:hover{text-decoration:underline;}
+
+
+@media(max-width:768px){
+    .header{flex-direction:column; text-align:center;}
+    .header .photo{margin-top:15px;}
+    .header .photo img{width:110px; height:110px;}
+    h1{font-size:1.6rem;}
+    h2{font-size:1.3rem;}
+}
