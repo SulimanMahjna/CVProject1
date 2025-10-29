@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="../static/css/styles.css">
 </head>
 <body>
    <div class="header">
@@ -13,15 +13,16 @@
         
     </div>
     <div class="photo">
-        <img src="{{ url_for('static', filename='hello.png') }}"alt="cvpic">
+        <img src="../static/img/hello.png"alt="cvpic">
     </div>
 </div>
     <h2>About Me:</h2>
     <h4>
         I am Hatm Osama Hatm Sinjlawi, a passionate computer science graduate with experience in Python, Flask, 
         web development, and API design. I enjoy creating efficient and clean code, solving problems, and 
-        learning new technologies to build innovative projects.
+        learning new technologies to build innovative projects. <br> <button class="btn">Genarate about me </button>
     </h4>
+    
 
     <h2>Education :</h2>
      <h4>Bachelor degree Computer science from Al Ahlyeh Amman University </h4>
