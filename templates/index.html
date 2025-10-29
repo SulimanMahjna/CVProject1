@@ -17,11 +17,16 @@
     </div>
 </div>
     <h2>About Me:</h2>
-    <h4>
-        I am Hatm Osama Hatm Sinjlawi, a passionate computer science graduate with experience in Python, Flask, 
-        web development, and API design. I enjoy creating efficient and clean code, solving problems, and 
-        learning new technologies to build innovative projects. <br> <button class="btn">Genarate about me </button>
-    </h4>
+    {% if text %}
+    <p> {{ text }}!</p>
+{% else %}
+    <p>I am Hatm Osama Hatm Sinjlawi, a passionate computer 
+        science graduate with experience in Python, Flask, 
+        web development, and API design.
+         I enjoy creating efficient and clean code, solving problems, and 
+        learning new technologies to build innovative projects.</p>
+{% endif %}
+    <button class="btn">Genarate about me </button>
     
 
     <h2>Education :</h2>
