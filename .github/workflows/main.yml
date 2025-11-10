@@ -1,4 +1,4 @@
-name: CI/CD Pipeline – Deploy to Render
+name: CI/CD Pipeline – Deploy to Render (Inline Config)
 
 on:
   push:
@@ -6,9 +6,10 @@ on:
       - main
 
 jobs:
+  # 🧪 Build & Test Job
   build-and-test:
-    name: Build and Test
     runs-on: ubuntu-latest
+    name: Build and Test
 
     steps:
       - name: Checkout Repository
@@ -27,18 +28,20 @@ jobs:
       - name: Run Tests
         run: |
           echo "🧪 Running tests..."
-          pytest || echo "⚠️ No tests found, skipping."
+          pytest || echo "⚠️ No tests found, continuing."
 
+  # 🚀 Deploy to Render
   deploy:
-    name: Deploy to Render
     runs-on: ubuntu-latest
+    name: Deploy to Render
     needs: build-and-test
 
     steps:
       - name: Trigger Render Deployment
         run: |
-          echo "🚀 Triggering Render deployment..."
+          echo "🚀 Starting deployment to Render..."
           curl -X POST \
             -H "Accept: application/json" \
-            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
-            https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys
+            -H "Authorization: Bearer rnd_0RNGRzMCCnW0gKOVDZHHlpfLu3aK" \
+            https://api.render.com/v1/services/srv-d48rddpr0fns7387htc0/deploys
+          echo "✅ Deployment triggered on Render!"
