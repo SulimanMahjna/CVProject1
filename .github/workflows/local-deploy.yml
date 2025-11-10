@@ -1,4 +1,4 @@
-name: CI/CD Pipeline – Deploy to Local Ubuntu
+name: CI/CD Pipeline – Local Self-Hosted Runner
 
 on:
   push:
@@ -7,32 +7,33 @@ on:
 
 jobs:
   build-test-deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
-      - name: Checkout code
+      - name: 🧭 Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: ⚙️ Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Install dependencies
+      - name: 📦 Install dependencies
         run: |
+          pip install --upgrade pip
           pip install -r requirements.txt
           pip install pytest
 
-      - name: Run tests
+      - name: 🧪 Run tests
         run: |
-          echo "🧪 Running tests..."
+          echo "Running tests..."
           pytest || echo "⚠️ No tests found, continuing."
 
-      - name: Deploy to Local Ubuntu Server
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.SERVER_IP }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          script: |
-            bash /opt/cvproject1/deploy.sh
+      - name: 🐳 Build and Deploy Docker Container
+        run: |
+          echo "🚀 Building and deploying container locally..."
+          cd /opt/cvproject1/CVProject1
+          docker compose down || true
+          docker compose build --no-cache
+          docker compose up -d
+          echo "✅ Local deployment complete!"
