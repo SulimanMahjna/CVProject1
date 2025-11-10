@@ -28,6 +28,12 @@ jobs:
           echo "🧪 Running tests..."
           pytest || echo "⚠️ No tests found, continuing."
 
+                - name: 🔍 Debug Secrets
+        run: |
+          echo "SERVER_IP: ${{ secrets.SERVER_IP }}"
+          echo "SERVER_USER: ${{ secrets.SERVER_USER }}"
+
+
       - name: 🚀 Deploy to Local Ubuntu Server
         uses: appleboy/ssh-action@v1.0.3
         with:
