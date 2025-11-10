@@ -1,4 +1,4 @@
-name: CI/CD Pipeline – Deploy to Render (Inline Config)
+name: CI/CD Pipeline – Deploy to Local Ubuntu
 
 on:
   push:
@@ -6,42 +6,34 @@ on:
       - main
 
 jobs:
-  # 🧪 Build & Test Job
-  build-and-test:
+  build-test-deploy:
     runs-on: ubuntu-latest
-    name: Build and Test
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: '3.11'
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: |
           pip install -r requirements.txt
           pip install pytest
 
-      - name: Run Tests
+      - name: Run tests
         run: |
           echo "🧪 Running tests..."
           pytest || echo "⚠️ No tests found, continuing."
 
-  # 🚀 Deploy to Render
-  deploy:
-    runs-on: ubuntu-latest
-    name: Deploy to Render
-    needs: build-and-test
-
-    steps:
-      - name: Trigger Render Deployment
-        run: |
-          echo "🚀 Starting deployment to Render..."
-          curl -X POST \
-            -H "Accept: application/json" \
-            -H "Authorization: Bearer rnd_0RNGRzMCCnW0gKOVDZHHlpfLu3aK" \
-            https://api.render.com/v1/services/srv-d48rddpr0fns7387htc0/deploys
-          echo "✅ Deployment triggered on Render!"
+      - name: 🚀 Deploy to Local Ubuntu Server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            echo "🔁 Pulling latest code on server..."
+            bash /opt/cvproject1/deploy.sh
